@@ -1,0 +1,34 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Follow the Floor Price of NFT collections with Discord and Telegram personalized notifications"/>
+  <meta name="google-site-verification" content="2qJFSkL630qiHhzS29pTHbPFIOhnp6sLXBQ0EII153k" />
+  <title>Track My Assets - NFT Floor Price alerts</title>
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="stylesheet" href="/bootstrap-5.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/fontawesome-free-6.1.1/css/all.css">
+  <link rel="stylesheet" href="/toastr.min.css">
+  <link rel="stylesheet" href="/styles.min.css">
+</head>
+
+<body>
+  <div id="background-shadow"></div>
+  <nav class="navbar navbar-expand-lg">
+    <h1><a class="navbar-brand" href="/">Track My Assets</a></h1>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <% if(user) { %>
+          <li class="nav-item"><a href="/dashboard">Dashboard</a></li>
+          <li class="nav-item"><a href="/wallet">My Wallet</a></li>
+          <li class="nav-item"><a href="/logout">Log out</a></li>
+        <% } else { %>
+          <li class="nav-item"><a href="/login">Log in</a></li>
+          <li class="nav-item"><a href="/signup" class="btn-signup">Sign up</a></li>
+        <% } %>
+      </ul>
+    </div>
+  </nav>

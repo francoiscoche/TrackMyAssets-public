@@ -1,0 +1,66 @@
+<%- include('partials/header'); -%>
+
+<header>
+  <div class="container">
+    <div class="row headings animated fadeInUp">
+      <h2 class="title-home">Track My Assets</h2>
+      <h3 class="subtitle-home">Keep track of every price move</h3>
+    </div>
+  </div>
+  <div class="row button-home justify-content-center">
+    <% if(!user) { %>
+      <a class="btn-signup animated fadeInLeft" href="/signup">Sign up now !</a>
+    <% } %>
+    <a class="btn-custom-home animated fadeInRight" data-toggle="modal" data-target="#exampleModalLong"><i class="fa-solid fa-code"></i> Stay tuned</a>
+  </div>
+  <br>
+  <div class="container">
+    <div class="row section-home">
+      <div class="col-md-6">
+        <img class="img-fluid img-computer-smartphone animated fadeInLeft" src="/img/telegram-discord.png" alt="">
+      </div>
+      <div class="col-sm-12 col-md-6 text-left animated fadeInRight">
+        <p class="title-section">Follow the floor price of NFT collections</p>
+        <p>Get notifications on Telegram and Discord for every floor price movement of your favorite NFT collections</p>
+        <br>
+        <p><i class="fa-solid fa-check"></i> OpenSea</p>
+        <p><i class="fa-solid fa-check"></i> MagicEden</p>
+        <p><i class="fa-solid fa-check"></i> LooksRare</p>
+        <br><br>
+        <p class="title-section">Set a custom price alert</p>
+        <p>Choose a target price and be notified when the floor price cross the target of your followed NFT collections.</p>
+        <br><br>
+      </div>
+    </div>
+    <div class="row justify-content-center reveal">
+      <img class="img-fluid img-logo-homepage" src="/img/marketplace-logo/opensea-logo.png" alt="">
+      <img class="img-fluid img-logo-homepage" src="/img/marketplace-logo/magiceden-logo.png" alt="">
+      <img class="img-fluid img-logo-homepage" src="/img/marketplace-logo/looksrare-logo.png" alt="">
+    </div>
+    <br>
+  </div>
+  </div>
+  <!-- Modal Comming Soon -->
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content modal-content-homepage">
+        <div class="modal-body modal-body-homepage">
+          <h3>Comming Soon ...</h3>
+          <br>
+          <h6><i class="fa-solid fa-code icon-modal-comming-soon"></i> Other NFT platforms integration (Binance, Rarible, SolSea...)</h6>
+          <br>
+          <h6><i class="fa-solid fa-code icon-modal-comming-soon"></i> Tracking collateral integration for being notified when collateral is approaching the limit.</h6>
+          <br>
+          <h6><i class="fa-solid fa-code icon-modal-comming-soon"></i> Charts integration...</h6>
+          <br>
+          <h6><i class="fa-solid fa-code icon-modal-comming-soon"></i> And more...</h6>
+          <h6 style="text-align:right;"> ... Stay tuned</h6>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-custom-info" type="button" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<%- include('partials/footer'); -%>

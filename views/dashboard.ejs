@@ -1,0 +1,291 @@
+<%- include('partials/header'); -%>
+<main id="main">
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+      <hr>
+      <div class="custom-section">
+        <h5 class="title-custom-section"><i class="fa-regular fa-circle-check"></i> Accout informations</h5>
+        <br>
+        <p>You're currently connected as <span id="usermail"><%= user.email %></span></p>
+        <br>
+        <% if ( is_temporary_password ) { %>
+        <p class="warning-temporary-pass-dashboard"><i class="fa-solid fa-triangle-exclamation"></i> You're currently using a temporary password, please change it.</p><br>
+        <% } %>
+        <div class="row">
+          <div class="col-md-12 text-left modal-footer-welcome">
+            <button type="button" class="btn-custom-info btn-display-change-password">Change password <i class="fa-caret-down fa-solid rotate"></i></button>
+            <% if ( !is_checked_email ) { %>
+            <button data-toggle="tooltip" data-placement="top" title="Confirm your email address, to enable email notifications." type="button" class="btn-custom-alert btn-check-mail">Confirm my email</button>
+            <% } %>
+            <button type="button" class="btn-custom-alert btn-delete-account">Delete my account</button>
+          </div>
+        </div>
+        <br>
+        <div id="change-password">
+          <form id="change-password-form">
+            <input placeholder="Old password" class="input-change-password" type="password" name="oldPassword" required />
+            <br><br>
+            <input placeholder="New password" class="input-change-password" type="password" name="newPassword" required />
+            <br><br>
+            <input placeholder="Repeat new password" class="input-change-password" type="password" name="newPasswordBis" required />
+            <br><br>
+            <p class="warning-disconected-dashboard">After the validation you'll be disconected from the website. You'll have to reconnect with the new password.</p>
+            <br>
+            <button class="btn-custom-info btn-change-password">Change</button>
+            <div class="login error"></div>
+          </form>
+        </div>
+      </div>
+      <hr>
+      <div class="custom-section">
+        <h5 class="title-custom-section"><i class="fa-regular fa-circle-check"></i> Instructions for chat apps integration</h5>
+        <br>
+        <p>Below you will find your verification code. You must copy and paste it into the channel of either your <a class="link-apps" target="_blank" href="https://t.me/TrackMyAssetsBot">telegram app</a> or <a class="link-apps" target="_blank" href="https://discord.gg/yD5pMMC49c">discord app</a>.</p><br>
+        <div class="row copyCode">
+          <div class="col-lg-4">
+            <input class='form-control' type="text" value="/check <%= custom_id %>" id="userId" disabled="disabled" />
+          </div>
+          <br><br>
+          <div class="col-md-3">
+            <button class=" btn-custom-info button-dashboard-copy"><i class="fa-solid fa-copy"></i> Copy</button>
+          </div>
+        </div>
+        <br>
+        <% if ( !chat_id_telegram && !chat_id_discord ) { %>
+        <p>Once have been done, please reload the page.</p>
+        <br>
+        <% } %>
+        <% if ( chat_id_telegram || chat_id_discord ) { %>
+        <div class="notifications-status">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckTelegram" <% if (!chat_id_telegram) { %> disabled <% } if (telegram_notif_status) {  %> checked <% } %>>
+            <label class="form-check-label" for="flexSwitchCheckTelegram">Telegram notifications</label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDiscord" <% if (!chat_id_discord) { %> disabled <% } if (discord_notif_status) { %> checked <% } %>>
+            <label class="form-check-label" for="flexSwitchCheckDiscord">Discord notifications</label>
+          </div>
+          <div <% if (!is_checked_email) { %> data-toggle="tooltip" data-placement="top" title="Email have to be confirm before being activated." <% } %> class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckEmail" <% if (!is_checked_email) { %> disabled <% } if (email_notif_status) { %> checked <% } %>>
+            <label class="form-check-label" for="flexSwitchCheckEmail">Email notifications <i data-toggle="tooltip" data-placement="top" title="Email notifications, available only for custom alert" class="fa-solid fa-circle-info"></i></label>
+          </div>
+        </div>
+        <br>
+      </div>
+      <% } %>
+      <hr>
+      <% if ( chat_id_telegram || chat_id_discord ) { %>
+      <div id="arrayFloorPrice" class="custom-section">
+        <div id="array-section" class="custom-section">
+          <div class="loader"></div>
+          <div class="title-custom-section">
+            <h5> <i class="fa-regular fa-circle-check"></i> Global floor price alert</h5>
+            <p class="subtitle-dashboard">Receive a notification each time the floor price changes. Limited to 5 notications alerts.</p>
+            <br><br>
+          </div>
+          <form class="form-dashboard form-special-alert">
+            <label>Choose the plateform where the collection is listed on:</label>
+            <select class="plateform-dropdown form-select">
+              <option value="" selected></option>
+              <option value="opensea">OpenSea</option>
+              <option value="looksrare">LooksRare</option>
+              <option value="magiceden">MagicEden</option>
+            </select>
+            <div id="input-collection-name">
+              <label id="label-collection-name"></label>
+              <input id="input-collection" name="collection_name" type="text" required />
+              <a style="color: #ffac00; text-align:right; display:block;" href="" data-toggle="modal" data-target="#modalHowItWork">How it work <i class="fa-solid fa-circle-question"></i></a>
+              <button id="btn-floor-alert" class="btn-custom-info">Submit</button>
+            </div>
+          </form>
+          <br><br>
+          <% if (getCollectionsInfos.length) { %>
+          <div class="table-dashboard">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th colspan="2">Collection Name</th>
+                  <th scope="col">Plateforme</th>
+                  <th scope="col">Floor Price</th>
+                  <th scope="col">24h AVG Price</th>
+                  <th scope="col">7D AVG Price</th>
+                  <th scope="col">30D AVG Price</th>
+                  <th scope="col">Action</th>
+                  <th scope="col">Notifications</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(var i in getCollectionsInfos){ %>
+                <tr>
+                  <td class="">
+                    <% if (getCollectionsInfos[i].image_url) { %>
+                    <img class="icon-collection" src=<%= getCollectionsInfos[i].image_url %> alt="icon collection">
+                    <% } else { %>
+                    <img class="icon-collection" src=/img/nft.png alt="icon collection">
+                    <% } %>
+                  </td>
+                  <td class="" id="nameColl">
+                    <% if (getCollectionsInfos[i].plateform_name == "opensea") { %>
+                    <a id="<%= getCollectionsInfos[i].collection_name %>" data-toggle="tooltip" data-placement="top" title="<%= getCollectionsInfos[i].name %>" href='https://opensea.io/collection/<%= getCollectionsInfos[i].collection_name %>' , target="_blank"><% if (getCollectionsInfos[i].name) { %><%= getCollectionsInfos[i].name %><% } else { %> <%= getCollectionsInfos[i].collection_name %> <% } %></a>
+                    <% } else if (getCollectionsInfos[i].plateform_name == "magiceden") { %>
+                    <a id="<%= getCollectionsInfos[i].collection_name %>" data-toggle="tooltip" data-placement="top" title="<%= getCollectionsInfos[i].name %>" href='https://www.magiceden.io/marketplace/<%= getCollectionsInfos[i].collection_name %>' , target="_blank"><% if (getCollectionsInfos[i].name) { %><%= getCollectionsInfos[i].name %><% } else { %> <%= getCollectionsInfos[i].collection_name %> <% } %></a>
+                    <% } else if (getCollectionsInfos[i].plateform_name == "looksrare") { %>
+                    <a id="<%= getCollectionsInfos[i].collection_name %>" data-toggle="tooltip" data-placement="top" title="<%= getCollectionsInfos[i].name %>" href='https://looksrare.org/collections/<%= getCollectionsInfos[i].address %>' , target="_blank"><% if (getCollectionsInfos[i].name) { %><%= getCollectionsInfos[i].name %><% } else { %> <%= getCollectionsInfos[i].collection_name %> <% } %></a>
+                    <% } else { %>
+                    <%= getCollectionsInfos[i].collection_name %>
+                    <% } %>
+                  </td>
+                  <td class=""><%= getCollectionsInfos[i].plateform_name %></td>
+                  <td class="">
+                    <% if (getCollectionsInfos[i].plateform_name == "opensea" || getCollectionsInfos[i].plateform_name == "looksrare") { %>
+                    <img class="icon-currency" src="/img/icons-currency/eth.png" alt="icon currency">
+                    <% } else if (getCollectionsInfos[i].plateform_name == "magiceden") { %>
+                    <img class="icon-currency" src="/img/icons-currency/sol.png" alt="icon currency">
+                    <% } %>
+                    <%= getCollectionsInfos[i].floor_price %>
+                  </td>
+                  <td class=""><% if (getCollectionsInfos[i].one_day_average_price) { %><%= getCollectionsInfos[i].one_day_average_price %><% } else { %> - <% } %></td>
+                  <td class=""><% if (getCollectionsInfos[i].seven_day_average_price) { %><%= getCollectionsInfos[i].seven_day_average_price %><% } else { %> - <% } %></td>
+                  <td class=""><% if (getCollectionsInfos[i].thirty_day_average_price) { %><%= getCollectionsInfos[i].thirty_day_average_price %><% } else { %> - <% } %></td>
+                  <td class="">
+                    <% if (getCollectionsInfos[i].plateform_name == "opensea") { %>
+                    <button id="btn-details" value="Details" class="btn-actions btn-custom-info"><i class="fa-solid fa-list-ul"></i> Stats</button>
+                    <% } %>
+                    <button id="btn-delete" value="Delete" class="btn-actions btn-custom-info"><i class="fa-regular fa-trash-can"></i></button>
+                  </td>
+                  <td class=" switch-row">
+                    <button id="switch-notifications" value="<%= getCollectionsInfos[i].notifications_status %>" class="switch-notif <% if (getCollectionsInfos[i].notifications_status) { %> switch-notif-on <% } else { %> switch-notif-off <% } %>"><% if (getCollectionsInfos[i].notifications_status) { %> <i class="fa-solid fa-bell"></i> <% } else { %><i class="fa-solid fa-bell-slash"></i><% } %></button>
+                  </td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+          <% } %>
+        </div>
+      </div>
+      <hr>
+      <div id="add-collection" class="custom-section">
+        <h5 class="title-custom-section"><i class="fa-regular fa-circle-check"></i> Custom floor price alert</h5>
+        <p class="subtitle-dashboard">Receive a notification only whenever the floor price crosses a set level. Limited to 3 custom alerts.</p>
+        <br><br>
+
+
+        <form class="form-dashboard">
+          <label>Choose the plateform where the collection is listed on:</label>
+          <select class="plateform-dropdown-custom-alert form-select">
+            <option value="" selected></option>
+            <option value="opensea">OpenSea</option>
+            <option value="magiceden">MagicEden</option>
+          </select>
+          <div id="input-collection-name-special">
+            <label id="label-collection-name-special">Collection Name:</label>
+            <input id="input-collection-special" name="collection_name_special" type="text" required />
+            <a style="color: #ffac00; text-align:right; display:block;" href="" data-toggle="modal" data-target="#modalHowItWork">How it work <i class="fa-solid fa-circle-question"></i></a>
+          </div>
+          <div id="input-collection-price-special">
+            <label id="label-collection-price-special">Notify me when the price crosses the next level</label>
+            <input id="input-price-special" name="collection_price_special" type="number" step="0.01" required />
+            <br><br>
+            <button id="btn-special-floor-alert" class="btn-custom-info">Submit</button>
+          </div>
+        </form>
+        <br><br>
+        <div id="table-dashboard-alert">
+          <% if (getFpSpecialInfosUser.length) { %>
+          <div class="table-dashboard">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th colspan="2">Collection Name</th>
+                  <th scope="col">Alert Price</th>
+                  <th scope="col">Floor Price</th>
+                  <th scope="col">24h AVG Price</th>
+                  <th scope="col">7D AVG Price</th>
+                  <th scope="col">30D AVG Price</th>
+                  <th colspan="2">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(var i in getFpSpecialInfosUser){ %>
+                <tr>
+                  <td class="col-1">
+                    <% if (getFpSpecialInfosUser[i].image_url) { %>
+                    <img class="icon-collection" src=<%= getFpSpecialInfosUser[i].image_url %> alt="icon collection">
+                    <% } else { %>
+                    <img class="icon-collection" src=/img/nft.png alt="icon collection">
+                    <% } %>
+                  </td>
+                  <td class="col-4" id="nameColl">
+                    <a id="<%= getFpSpecialInfosUser[i].collection_name %>" data-toggle="tooltip" data-placement="top" title="<%= getFpSpecialInfosUser[i].name %>" href='https://opensea.io/collection/<%= getFpSpecialInfosUser[i].collection_name %>' , target="_blank"><% if (getFpSpecialInfosUser[i].name) { %><%= getFpSpecialInfosUser[i].name %><% } else { %> <%= getFpSpecialInfosUser[i].collection_name %> <% } %></a>
+                  </td>
+                  </td>
+                  <td class="col-2"><%= getFpSpecialInfosUser[i].collection_price %></td>
+                  <td class="col-1">
+                    <% if (getFpSpecialInfosUser[i].plateform_name == "opensea" || getFpSpecialInfosUser[i].plateform_name == "looksrare") { %>
+                    <img class="icon-currency" src="/img/icons-currency/eth.png" alt="icon currency">
+                    <% } else if (getFpSpecialInfosUser[i].plateform_name == "magiceden") { %>
+                    <img class="icon-currency" src="/img/icons-currency/sol.png" alt="icon currency">
+                    <% } %>
+                    <%= getFpSpecialInfosUser[i].floor_price %>
+                  </td>
+                  <td class="col-1"><% if (getFpSpecialInfosUser[i].one_day_average_price) { %><%= getFpSpecialInfosUser[i].one_day_average_price %><% } else { %> - <% } %></td>
+                  <td class="col-1"><% if (getFpSpecialInfosUser[i].seven_day_average_price) { %><%= getFpSpecialInfosUser[i].seven_day_average_price %><% } else { %> - <% } %></td>
+                  <td class="col-1"><% if (getFpSpecialInfosUser[i].thirty_day_average_price) { %><%= getFpSpecialInfosUser[i].thirty_day_average_price %><% } else { %> - <% } %></td>
+                  <td class="col-1"><button id="btn-delete-alert" value="Delete" class="btn-custom-info"> <i class="fa-regular fa-trash-can"></i></button>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+          <% } %>
+        </div>
+      </div>
+      <hr>
+    </div>
+    <% } %>
+  </div>
+  <!-- Modal Welcome -->
+  <div class="modal fade" id="modalWelcome" tabindex="-1" role="dialog" aria-labelledby="modalWelcome" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content modal-content-homepage">
+        <div class="modal-body-welcome information-just-registered">
+
+          <h3>Welcome to Track My Assets</h3>
+          <br><br>
+          <p> <i class="fa-solid fa-heart"> </i> First of all, thank you for registering on my project.<br><br><i class="fa-solid fa-circle-exclamation">
+
+            </i> Next step is to follow the instructions for integrating notifications, once you have closed this popup.<br><br><i class="fa-solid fa-circle-question"></i> If there is any problem, do not hesitate to contact me via this address : contact@trackmyassets.info or via <a class="link-apps" target="_blank" href="https://discord.gg/yD5pMMC49c">Discord</a>
+            <br> <br><br>Thanks.
+          </p>
+        </div>
+        <div class="modal-footer-welcome">
+          <button class="btn-custom-info" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal HowItWork -->
+  <div class="modal fade" id="modalHowItWork" tabindex="-1" role="dialog" aria-labelledby="modalHowItWork" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content modal-content-homepage">
+        <div class="modal-body ">
+          <h6>For OpenSea & MagicEden : </h6>
+          <p>To follow a collection on OpenSea or MagicEden you must retrieve the name of the desired collection.</p>
+          <br>
+          <p>Example for the SandBox collection: Select an item from the collection. You will then find name of the collection in the search bar:</p>
+          <br>
+          <img id="img-modal-searchbar" class="img-model-howitwork" alt="searchbar" src="/img/browser-sandbox.png" />
+          <br><br>
+          <p>Bug report or informations ? contact@trackmyassets.info or contact me on Discord <a style="cursor: pointer;" onClick="javascript:window.open('https://discord.gg/yD5pMMC49c', '_blank');"><i class="fa-brands fa-discord"></i></a></p>
+          <br><br>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-custom-info" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<%- include('partials/footer'); -%>

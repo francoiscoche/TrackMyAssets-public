@@ -1,0 +1,416 @@
+/* google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+/****************************************************************************************/
+/********************************** STYLE GLOBAL ***************************************/
+/****************************************************************************************/
+ body{
+     margin: 20px 40px;
+     letter-spacing: 1px;
+     background: #0e1621;
+     position: absolute;
+}
+ h1, h2, h3, h4, ul, li, a, p, label, button, div, footer{
+     margin: 0;
+     padding: 0;
+     font-family: 'Quicksand', sans-serif;
+     color: rgb(215, 209, 209);
+}
+ ul{
+     list-style-type: none;
+}
+ a{
+     text-decoration: none;
+}
+ a:hover{
+     color:rgb(215, 209, 209);
+}
+ nav{
+     display: flex;
+     justify-content: space-between;
+     align-items: flex-end;
+     margin-bottom: 120px;
+}
+ nav ul{
+     display: flex;
+     align-items: center;
+}
+ nav li{
+     margin-left: 20px;
+}
+ nav li a{
+     text-transform: uppercase;
+     font-weight: 700;
+     font-size: 0.8em;
+     display: block;
+     padding: 10px 16px;
+     letter-spacing: 2px;
+}
+ .btn{
+     border-radius: 9px;
+     background: #276582;
+}
+ input{
+     padding: 10px 12px;
+     border-radius: 4px;
+     border: 1px solid #ddd;
+     font-size: 1em;
+     width: 100%;
+}
+ label{
+     display: block;
+     margin: 20px 0 10px;
+}
+ button{
+     /* margin-top: 30px; */
+     border-radius: 36px;
+     background: #4b6428;
+     border:0;
+     text-transform: uppercase;
+     font-weight: 700;
+     font-size: 0.8em;
+     display: block;
+     padding: 10px 16px;
+     letter-spacing: 2px;
+}
+ .error{
+     color: #ff0099;
+     margin: 10px 2px;
+     font-size: 0.8em;
+     font-weight: bold;
+}
+ header{
+    align-items: center;
+}
+ header h2{
+     font-size: 3em;
+     margin-bottom: 10px;
+}
+ header h3{
+     font-size: 1.6em;
+     margin-bottom: 10px;
+     margin-left: 2px;
+     color: #999;
+}
+ header .btn{
+     margin-top: 20px;
+     padding: 12px 18px;
+     text-transform: uppercase;
+     font-weight: bold;
+     display: inline-block;
+     font-size: 0.8em;
+}
+ footer{
+     text-align: center;
+     margin-top: 120px;
+     margin-bottom: 30px;
+     color: #aaa;
+}
+/****************************************************************************************/
+/********************************** STYLE HOME LOGIN SIGNUP *****************************/
+/****************************************************************************************/
+ .form-signup h2, .form-login h2{
+     font-size: 2.4em;
+     font-weight: 900;
+     margin-bottom: 40px;
+}
+ .form-signup, .form-login{
+     width: 360px;
+     margin: 0 auto;
+     padding: 30px;
+     box-shadow: 1px 2px 3px rgba(0,0,0,0.1);
+     border-radius: 10px;
+     background: #1f2227;
+}
+ .btn-comming-soom {
+     display: block;
+     margin: auto;
+     margin-top: 20px !important;
+     display: block;
+     min-width: 190px;
+}
+ .headings h2, .headings p {
+     color: #ffac00;
+     text-align: center;
+}
+ .title-custom-section {
+     color: #ffac00;
+}
+ i.icon-modal-comming-soon {
+     color: rgb(251, 7, 7);
+}
+ .img-homepage{
+     width: 470px;
+     margin-top: 40px;
+     transition: transform .2s;
+}
+ .img-homepage:hover{
+     -ms-transform: scale(1.05);
+    /* IE 9 */
+     -webkit-transform: scale(1.05);
+    /* Safari 3-8 */
+     transform: scale(1.05);
+}
+/****************************************************************************************/
+/********************************** STYLE DASHBOARD *************************************/
+/****************************************************************************************/
+ .form-dashboard {
+     border-radius: 5px;
+     background: #1f2227;
+     margin: 0 auto;
+     padding: 30px;
+     box-shadow: 1px 2px 3px rgba(0,0,0,0.1);
+}
+ tbody {
+     color:white;
+}
+ input#userId {
+     background-color: #2522226e;
+     color: #666464;
+}
+ .table-dashboard {
+     color:#ddd;
+}
+ i.fa-solid.fa-heart {
+     color: rgb(183, 13, 13);
+}
+ .fa-circle-exclamation, .fa-circle-question {
+     color: #ffac00;
+}
+ .button-dashboard-copy, .btn-display-change-password, .btn-dashboard-delete, .btn-donate, .btn-comming-soom, .submit-btn-dashboard, .btn-twitter {
+     border-radius: 6px;
+     margin-top: 0px;
+}
+ button.btn-twitter {
+     margin-left: 25px;
+     background: #b57b04;
+}
+ a.btn-signup {
+     border-radius: 6px;
+     background: #b57b04;
+     text-transform: uppercase;
+     font-weight: 700;
+     font-size: 0.8em;
+     padding: 10px 16px;
+     letter-spacing: 2px;
+     text-align: center;
+     margin: 0 auto;
+     display: block;
+}
+ .custom-section {
+     margin-bottom: 20px;
+     margin-top: 20px;
+}
+ p.information-just-registered {
+     padding: 20px;
+     background-color: #0c3220;
+     color: #2e9866;
+     font-weight: 500;
+     border-radius: 7px;
+}
+/* OVERLAY */
+ div#background-shadow {
+     display: none;
+     background-color: #000000db;
+     opacity:0.8;
+     position:fixed;
+     width:100%;
+     height:100%;
+     top:0px;
+     left:0px;
+     z-index:1000;
+}
+ .fixed-top {
+     top: 20;
+     position: fixed;
+     right: 400;
+     left: 400;
+     text-align: center;
+}
+/* LOADER */
+ .loader {
+     position: fixed;
+     left: 50%;
+     top:50%;
+     z-index: 99;
+     display: none;
+     border: 16px solid #f3f3f3;
+     border-radius: 50%;
+     border-top: 16px solid blue;
+     width: 120px;
+     height: 120px;
+     -webkit-animation: spin 2s linear infinite;
+     animation: spin 2s linear infinite;
+}
+ @-webkit-keyframes spin {
+     0% {
+         -webkit-transform: rotate(0deg);
+    }
+     100% {
+         -webkit-transform: rotate(360deg);
+    }
+}
+ @keyframes spin {
+     0% {
+         transform: rotate(0deg);
+    }
+     100% {
+         transform: rotate(360deg);
+    }
+}
+/* POP UP */
+ div#toast-container {
+     top: 20px;
+}
+ #toast-container>div {
+     -webkit-box-shadow: 0px 0px 8px 2px #000000;
+     box-shadow: 0px 0px 8px 2px #000000;
+}
+ .toast-message {
+     color: white;
+}
+ .toast.toast-success {
+     background-color: #4b6428;
+}
+ #contract-or-name-dropdown, #input-collection-name {
+     display:none;
+}
+ .modal-content.modal-content-homepage {
+     background-color: #0e1621;
+     font-size: 0.7rem;
+}
+ .modal-content.modal-content-homepage img {
+     max-width: 90%;
+}
+ .link-apps {
+     text-decoration: underline;
+     color: #ffac00;
+}
+ .link-apps:hover {
+     color: #efbc57;
+}
+ .form-switch .form-check-input {
+     width: 3em;
+     margin-right: 15px;
+}
+ .form-check-input:checked {
+     background-color: #4b6428;
+     border-color: #4b6428;
+}
+ .form-check-input:focus {
+     border-color: #a4fe86;
+     outline: 0;
+     box-shadow: 0 0 0 0.25rem rgb(116 253 13 / 25%) 
+}
+ .form-switch .form-check-input:focus {
+     background-image: url("/img/switch.png");
+}
+ img#qrcode-footer {
+     position: relative;
+     display: block;
+     margin-left: auto;
+     margin-right: auto;
+     width: 60%;
+}
+ input, #input-collection, #input-collection-special {
+     background-color: #1f2227;
+     color: white;
+}
+ select.plateform-dropdown.form-select {
+     background-color: #1f2227;
+     color: white;
+}
+ p.comming-soon-dashboard, p.warning-disconected-dashboard {
+     font-size: 0.8rem;
+     font-style: italic;
+     color: #e1ac00;
+}
+ p.subtitle-dashboard {
+     font-size: 0.9rem;
+}
+ .table-dashboard {
+     background-color: #1f2227;
+     padding: 20px;
+}
+ table.table.table-borderless {
+     color:white;
+     margin-bottom: 0rem;
+}
+
+.input-change-password {
+    max-width: 250px;
+}
+
+#change-password {
+    display:none;
+}
+
+.warning-temporary-pass-dashboard {
+    color: #ff0000;
+}
+
+/* .img-smartphone {
+    float:right;
+} */
+
+/* img.img-fluid.mx-auto.d-block.img-smarphone {
+    width: 610px;
+    margin-top: 40px;
+} */
+
+@media only screen and (min-width: 768px) {
+    .img-smartphone {
+        float: right;
+        max-width: 280px;
+    }
+  }
+
+  @media only screen and (max-device-width: 768px) {
+    .img-smartphone {
+    display: none;
+    }
+  }
+
+
+
+
+
+.text-homepage p, h2.title-homepage {
+    text-align: left;
+    margin: 20px;
+}
+
+.social-network {
+    text-decoration: underline;
+}
+
+
+
+/* OVER BOOTSTRAP NAVBAR */
+.navbar-brand {
+    font-size: calc(1.375rem + 1.5vw);
+}
+
+@media (min-width: 992px) {
+    .navbar-expand-lg .navbar-collapse {
+        display: contents !important;
+        justify-content: space-between;
+    }
+    .navbar-expand-lg {
+        justify-content: space-between;
+    }
+}
+
+
+
+.btn-footer {
+    padding: 10px 16px;
+    background-color: #4b6428;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+}
+.div-button {
+    margin-top: 17px;
+}
+

@@ -1,0 +1,82 @@
+<%- include('partials/header'); -%>
+<main>
+  <span hidden="hidden" id="custom_id"><%= custom_id %></span>
+  <div class="col-md-10 offset-md-1">
+
+    <div class="loader"></div>
+    <hr>
+    <div class="custom-section-wallet">
+      <h5 class="title-custom-section"><i class="fa-regular fa-circle-check"></i> Wallet integration</h5>
+      <p class="subtitle-dashboard">Display the NFT you have in your wallet. Only available for ETH address.</p><br>
+      <p class="comming-soon-dashboard">Display limited to maximum 50 NFTs. Feature in Beta mode.</p>
+      <br><br><br>
+      <div class="row justify-content-center">
+        <% if (getInfosWallet == "") { %>
+        <div class="col-4">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
+            </div>
+            <input class='form-control' type="text" placeholder="Wallet address" aria-describedby="basic-addon1" value="" id="wallet-address" />
+          </div>
+        </div>
+        <div class="col-4">
+          <button id="btn-wallet" class="btn-custom-info"><i class="fa-solid fa-wallet"></i> Submit</button>
+        </div>
+        <% } else { %>
+        <div class="col-12">
+          <div class="btn-dscnt-refresh">
+            <button id="dscnt-btn-wallet" class="btn-custom-alert"><i class="fa-solid fa-arrow-right-from-bracket"></i> Disconnect wallet</button>
+            <button id="" class="btn-custom-info" data-toggle="tooltip" data-placement="top" title="Comming soon" disabled><i class="fa-solid fa-arrows-rotate"></i> Refresh (Comming soon)</button>
+          </div>
+        </div>
+        <% } %>
+      </div>
+      <br>
+      <br>
+    </div>
+    <div class="to-reload">
+      <% if( getInfosWallet != "") { %>
+      <div class="row display-wallet">
+        <div class="col-12 col-lg-3 side-collections">
+          <p class="title-collections">Collections</p>
+          <br>
+          <% if( typeof(arrCollectionName) !="undefined") { %>
+          <% for(var i in arrCollectionName){ %>
+          <div class="collection-side">
+            <img class="collection-img-side" src="<% if ( arrCollectionName[i].collection_img_url)  { %><%= arrCollectionName[i].collection_img_url %><% } else { %> /img/nft.png <% } %>" alt="icon collection">
+            <div class="collection-name-side" data-toggle="tooltip" data-placement="top" title="<%= arrCollectionName[i].collection_name %>"><%= arrCollectionName[i].collection_name %></div>
+          </div>
+          <br>
+          <% } %>
+          <% } %>
+        </div>
+        <div class="col-12 col-lg-8 table-collections">
+          <div id="display-nft">
+            <div class="row justify-content-center">
+              <% if( typeof(getInfosWallet) !="undefined") { %>
+              <% for(var i in getInfosWallet){ %>
+              <div class="nft-card col-2" onclick="window.open('https\://opensea.io/assets/ethereum/<%= getInfosWallet[i].address_contract %>/<%= getInfosWallet[i].token_id %>', '_blank');">
+                <div class="collection-img" onclick="window.open('https\://opensea.io/collection/<%= getInfosWallet[i].slug %>', '_blank');"><img class="icon-collection" src=<% if ( getInfosWallet[i].image_url_collection) { %><%= getInfosWallet[i].image_url_collection %><% } else { %> '/img/nft.png' <% } %> alt="icon collection"></div>
+                <div class="img-nft">
+                  <img class="img-nft-wallet" src=<% if ( getInfosWallet[i].image_url) { %><%= getInfosWallet[i].image_url %><% } else { %> '/img/nft.png' <% } %> alt="icon collection">
+                </div>
+                <br>
+                <p class="title-card"><%= getInfosWallet[i].name %></p><br>
+                <p class="content-card">Last Price : <%= getInfosWallet[i].total_price %></p>
+                <p class="content-card"><a class="" target="_blank" href="https://opensea.io/assets/ethereum/<%= getInfosWallet[i].address_contract %>/<%= getInfosWallet[i].token_id %>">OpenSea</a> </p>
+                <br>
+              </div>
+              <% } %>
+            </div>
+            <% } %>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+
+    <hr>
+  </div>
+</main>
+<%- include('partials/footer'); -%>

@@ -1,0 +1,126 @@
+<%- include('partials/header'); -%>
+<% if (collection[0]) { %>
+<%      collection = collection[0]; %>
+<%  } %>
+
+<main>
+  <span id="slug" hidden><%= collection['collection_name'] %></span>
+  <div class="col-md-10 offset-md-1">
+    <hr>
+    <br>
+    <h5 class="title-custom-section"> <i class="fa-regular fa-circle-check"></i> Detailed collection stats</h5>
+    <br><br>
+    <div class="header-collection-section">
+      <div class="col-12">
+        <div class="row">
+          <!-- <div class="col-7"> -->
+          <div class="title-collection">
+            <img class="icon-collection" src=<%= collection['image_url'] %> alt="Girl in a jacket">
+            <h5 id="collection-name"><%= collection['name'] %></h5>
+          </div>
+          <br><br>
+          <%= collection['description'] %>
+          <br><br>
+          <br>
+          <div class="social-network">
+            <% if (collection['external_link']) { %><a href='<%= collection['external_link'] %>' , target="_blank" data-toggle="tooltip" data-placement="top" title="Site Web"><i class="fa-solid fa-computer"></i></a><%  } %>
+            <% if (collection['telegram_url']) { %><a href='<%= collection['telegram_url'] %>' , target="_blank" data-toggle="tooltip" data-placement="top" title="Telegram"><i class="fa-brands fa-telegram"></i></a><%  } %>
+            <% if (collection['discord_url']) { %><a href='<%= collection['discord_url'] %>' , target="_blank" data-toggle="tooltip" data-placement="top" title="Discord"><i class="fa-brands fa-discord"></i></a><%  } %>
+            <% if (collection['twitter_username']) { %><a href='https://www.twitter.com/<%= collection['twitter_username'] %>' , target="_blank" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa-brands fa-twitter"></i></a><%  } %>
+
+            <% if (collection['collection_name']) { %><a href='https://opensea.io/collection/<%= collection['collection_name'] %>' , target="_blank">OpenSea</a><%  } %>
+          </div>
+          <!-- </div> -->
+          <!-- <div class="col-5 header-encart-section"> -->
+          <div class="row">
+            <div class="col-3 header-encart">
+              <span class="title-encart">Floor Price</span><br>
+              <span class="value-encart"></span><img class="icon-currency" src="/img/icons-currency/eth.png" alt="icon currency"><%= collection['floor_price'] %></span>
+            </div>
+            <div class="col-3 header-encart">
+              <span class="title-encart">Supply</span><br>
+              <span class="value-encart"><%= collection['total_supply'] %></span>
+            </div>
+            <!-- </div> -->
+            <!-- <div class="row"> -->
+            <div class="col-3 header-encart">
+              <span class="title-encart">Market Cap</span><br>
+              <span class="value-encart"></span><%= collection['market_cap'] %></span>
+            </div>
+            <div class="col-3 header-encart">
+              <span class="title-encart">Holders</span><br>
+              <span class="value-encart"></span><%= collection['num_owners'] %></span>
+            </div>
+          </div>
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+    <br><br>
+    <!-- <table class="table table-bordered table-collection">
+    <tbody>
+      <tr>
+        <th scope="row">Floor Price</th>
+        <td>
+          <img class="icon-currency" src="/img/icons-currency/eth.png" alt="icon currency"><%= collection['floor_price'] %>
+        </td>
+        <th scope="row">Supply</th>
+        <td><%= collection['total_supply'] %></td>
+      </tr>
+      <tr>
+        <th scope="row">Market Cap</th>
+        <td><%= collection['market_cap'] %></td>
+        <th scope="row">Owners</th>
+        <td><%= collection['num_owners'] %></td>
+      </tr>
+    </tbody>
+  </table> -->
+
+    <div class="array-collection-section">
+      <table class="table table-borderless table-collection">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">24 Hours</th>
+            <th scope="col">7 Days</th>
+            <th scope="col">30 Days</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Average Price</th>
+            <td><%= collection['one_day_average_price'] %></td>
+            <td><%= collection['seven_day_average_price'] %></td>
+            <td><%= collection['thirty_day_average_price'] %></td>
+          </tr>
+          <tr>
+            <th scope="row">Price Change</th>
+            <td><%= collection['one_day_change'] %></td>
+            <td><%= collection['seven_day_change'] %></td>
+            <td><%= collection['thirty_day_change'] %></td>
+          </tr>
+          <tr>
+            <th scope="row">Sales</th>
+            <td><%= collection['one_day_sales'] %></td>
+            <td><%= collection['seven_day_sales'] %></td>
+            <td><%= collection['thirty_day_sales'] %></td>
+          </tr>
+          <tr>
+            <th scope="row">Volume</th>
+            <td><%= collection['one_day_volume'] %></td>
+            <td><%= collection['seven_day_volume'] %></td>
+            <td><%= collection['thirty_day_volume'] %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br><br>
+    <button id="btn-show-graph-fp" value="Details" class="btn-actions btn-custom-info"><i class="fa-solid fa-chart-line"></i> Chart Floor Price history</button>
+    <br><br>
+    <div class="chart-collection-section">
+      <canvas id="chartCollection"></canvas>
+    </div>
+    <hr>
+  </div>
+</main>
+<%- include('partials/footer'); -%>
